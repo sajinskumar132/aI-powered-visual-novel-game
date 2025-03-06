@@ -6,6 +6,7 @@
 # async def hello():
 #     return "Hello"
 
+# Generate the first line of a novel-style story and an image prompt with relevant details. The image should match the story and remain consistent. After each AI-generated story update, the user will respond, and the next line will be generated based on the reply. The output should be in JSON format: {story_name:"<story_name>" story_line: {Ai: "<AI-generated story>", story_image_prompt: "<77-token max prompt>"}}.
 from fastapi import FastAPI,HTTPException
 from diffusers import StableDiffusionPipeline
 from fastapi.staticfiles import StaticFiles
