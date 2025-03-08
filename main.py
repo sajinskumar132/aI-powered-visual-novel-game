@@ -7,7 +7,6 @@ from datetime import datetime
 from fastapi.middleware.cors import CORSMiddleware
 from models.base_models import ApiRequest, ModelRequest
 
-
 app = FastAPI()
 origins = ["*"]
 
