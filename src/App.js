@@ -24,52 +24,52 @@ function App() {
     try {
       setLoading(true);
       const story_response = await get_generated_story();
-      const { story_name, story_line } = JSON.parse(story_response); // Fix the response parsing
-      console.log(story_line);
-      if (story_line.story_content) {
-        setLoading(true);
-        const image_response = await get_generated_image(
-          story_line?.story_image_prompt
-        );
+      const { story_name, story_line } = JSON.parse(story_response);
+  
+  
+      if (story_line?.story_content) {
+        const image_response = await get_generated_image(story_line?.story_image_prompt);
         console.log(image_response);
+  
         setStory({
           story_name,
           story_content: story_line.story_content,
           story_image: image_response,
         });
-      }else{
+      } else {
         fetchStory();
       }
-      setLoading(false);
     } catch (error) {
-      setLoading(false);
       console.error("Error fetching story:", error);
+    } finally {
+      setLoading(false);
     }
   };
-
+  
   const fetchContiniousStory = async (user_input) => {
     try {
       setLoading(true);
       const story_response = await get_generated_story_continuation(user_input);
-      const { story_name, story_line } = JSON.parse(story_response); // Fix the response parsing
+      const { story_name, story_line } = JSON.parse(story_response);
+  
       console.log(story_line);
-      if (story_line.story_content) {
-        setLoading(true);
-        const image_response = await get_generated_image(
-          story_line?.story_image_prompt
-        );
+  
+      if (story_line?.story_content) {
+        const image_response = await get_generated_image(story_line?.story_image_prompt);
         console.log(image_response);
+  
         setStory({
           story_name,
           story_content: story_line.story_content,
           story_image: image_response,
         });
+  
         setUserInput("");
       }
-      setLoading(false);
     } catch (error) {
-      setLoading(false);
       console.error("Error fetching story:", error);
+    } finally {
+      setLoading(false);
     }
   };
   return (
