@@ -1,0 +1,24 @@
+.image_viewer_including_text_main_container{
+    position: relative;
+}
+.image_viewer{
+    width: 100%;
+    height: 700px;
+    object-fit: cover;
+}
+.image_viewer_text_container{
+    position: absolute;
+    bottom: -50px;
+    margin: 0px 30px;
+    background-color: white;
+    width: calc(100% - 60px);
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.image_viewer_text{
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+}
