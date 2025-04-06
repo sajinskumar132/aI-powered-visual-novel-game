@@ -28,7 +28,7 @@ app.mount("/generated_images", StaticFiles(directory=IMAGE_SAVE_DIR), name="gene
 model_id = "CompVis/stable-diffusion-v1-4"
 pipe = StableDiffusionPipeline.from_pretrained(model_id)
 pipe.enable_attention_slicing()  # Reduce memory usage
-pipe.to("cpu")  # Force CPU usage
+# pipe.to("cpu")  # Force CPU usage
 
 
 chat_history = []
@@ -45,7 +45,7 @@ async def generate_inital_story():
     chat_history.append({
         "role": "user",
         "content": """Generate the opening line of a novel-style story along with an image prompt that visually represents it.  
-                    The story and image must remain contextually consistent. The background image should dynamically change based on the story’s setting, while a character image is positioned in the foreground. The image should reflect the player’s input, including locations and situations.  
+                    The story and image must remain contextually consistent. The background image should dynamically change based on the story’s. The image should reflect the player’s input, including locations , situations etc.  
 
                     After each AI-generated update, the user will respond, and the next line will be generated based on the reply.  
 
@@ -53,8 +53,8 @@ async def generate_inital_story():
                     {
                         "story_name": "<Non-empty story title>",
                         "story_line": {
-                            "story_content": "<AI-generated story text>",
-                            "story_image_prompt": "<Concise 77-token max image prompt, including background context, foreground character, and player-defined elements>"
+                            "story_content": "< Non-empty AI-generated story text>",
+                            "story_image_prompt": "<Non-empty Concise 77-token max image prompt, including background context, foreground character, and player-defined elements>"
                         }
                     }
         """
@@ -91,7 +91,7 @@ async def generate_continuation_of_story(prompt: ApiRequest):
 @app.post("/generate_story_image")
 async def generate_image(prompt: ApiRequest):
   
-    image = pipe(prompt=prompt.prompt).images[0]
+    image = pipe(prompt=prompt.prompt,num_inference_steps=50).images[0]
     
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
     filename = f"image_{timestamp}.png"

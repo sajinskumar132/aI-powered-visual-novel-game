@@ -11,7 +11,7 @@ class ModelRequest:
     def OllamaModel(self, chat_history):
         try:
             response = ollama.chat(
-                model="llama3.2",  # Replace with the correct model name
+                model="llama3.2",  
                 messages=chat_history,
                 format="json"
             )
